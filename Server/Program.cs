@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using DOOR.Server.Data;
 using DOOR.Server.Models;
 using DOOR.EF.Data;
+using DOOR.Shared.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ builder.Services.AddIdentityServer()
 
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
+
+builder.Services.AddTransient<IOraTransMsgs, OraTransMsgs>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

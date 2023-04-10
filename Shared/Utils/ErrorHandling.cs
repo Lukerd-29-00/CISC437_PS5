@@ -9,7 +9,7 @@ namespace DOOR.Shared.Utils
 {
     public class ErrorHandling
     {
-        public static List<OraError> TryDecodeDbUpdateException(DbUpdateException ex, OraTransMsgs _OraTranslateMsgs)
+        public static List<OraError> TryDecodeDbUpdateException(DbUpdateException ex, IOraTransMsgs _OraTranslateMsgs)
         {
 
             if ((ex.InnerException is Microsoft.EntityFrameworkCore.DbUpdateException) ||
