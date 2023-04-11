@@ -1,14 +1,13 @@
 ﻿using DOOR.EF.Data;
-using Microsoft.AspNetCore.Mvc;
+using DOOR.Shared.DTO;
 using DOOR.Shared.Utils;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using DOOR.EF.Models;
-using DOOR.Shared.DTO;
 
 namespace DOOR.Server.Controllers.Common
 {
-    public abstract class BaseController<Raw, DTO, PK> : Controller where DTO : IDTO<Raw,PK> where Raw : class
+    public abstract class BaseController<Raw, DTO, PK> : Controller where DTO : IDTO<Raw, PK> where Raw : class
     {
 
         protected DOOROracleContext _context;

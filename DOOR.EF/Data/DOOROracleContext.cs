@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DOOR.EF.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using DOOR.EF.Models;
 
 namespace DOOR.EF.Data
 {

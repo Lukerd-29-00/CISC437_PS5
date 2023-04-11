@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DOOR.EF.Models;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using DOOR.EF.Models;
 namespace DOOR.Shared.DTO
 {
     public class InstructorPK
@@ -8,7 +8,7 @@ namespace DOOR.Shared.DTO
         public int SchoolId { get; set; }
         public int InstructorId { get; set; }
     }
-    public class InstructorDTO : TrackableDTO,IDTO<Instructor,InstructorPK>
+    public class InstructorDTO : TrackableDTO, IDTO<Instructor, InstructorPK>
     {
         public InstructorPK primaryKey()
         {
@@ -16,7 +16,7 @@ namespace DOOR.Shared.DTO
             {
                 SchoolId = SchoolId,
                 InstructorId = InstructorId
-            };     
+            };
         }
         public Instructor ToRecord()
         {

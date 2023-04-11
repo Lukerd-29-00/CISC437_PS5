@@ -1,13 +1,6 @@
-﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+﻿using DOOR.Server.Models;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
-using DOOR.Server.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DOOR.Server.Models;
-using Duende.IdentityServer.EntityFramework.Options;
-using Microsoft.Extensions.Options;
 
 
 namespace DOOR.Server.Data

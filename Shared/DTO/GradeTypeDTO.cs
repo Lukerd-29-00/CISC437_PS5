@@ -11,7 +11,7 @@ namespace DOOR.Shared.DTO
     }
 
 
-    public class GradeTypeDTO : TrackableDTO,IDTO<GradeType, GradeTypePK>
+    public class GradeTypeDTO : TrackableDTO, IDTO<GradeType, GradeTypePK>
     {
         public GradeTypePK primaryKey()
         {
@@ -21,7 +21,7 @@ namespace DOOR.Shared.DTO
                 GradeTypeCode = GradeTypeCode
             };
         }
-        
+
         public GradeType ToRecord()
         {
             return new GradeType

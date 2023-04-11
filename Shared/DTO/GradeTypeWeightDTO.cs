@@ -1,7 +1,7 @@
-﻿using DOOR.Shared.DTO;
+﻿using DOOR.EF.Models;
+using DOOR.Shared.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using DOOR.EF.Models;
 
 namespace DOOR.EF.DTO
 {
@@ -11,10 +11,10 @@ namespace DOOR.EF.DTO
         public int SectionId { get; set; }
         public string GradeTypeCode { get; set; } = null!;
     }
-    public class GradeTypeWeightDTO : TrackableDTO,IDTO<GradeTypeWeight, GradeTypeWeightPK>
+    public class GradeTypeWeightDTO : TrackableDTO, IDTO<GradeTypeWeight, GradeTypeWeightPK>
     {
 
-        public GradeTypeWeightPK primaryKey() 
+        public GradeTypeWeightPK primaryKey()
         {
             return new GradeTypeWeightPK
             {
@@ -22,7 +22,7 @@ namespace DOOR.EF.DTO
                 SectionId = SectionId,
                 GradeTypeCode = GradeTypeCode
             };
-        } 
+        }
         public GradeTypeWeight ToRecord()
         {
             return new GradeTypeWeight

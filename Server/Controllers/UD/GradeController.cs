@@ -6,7 +6,6 @@ using DOOR.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using static System.Collections.Specialized.BitVector32;
 
 namespace CSBA6.Server.Controllers.app
 {
@@ -48,7 +47,7 @@ namespace CSBA6.Server.Controllers.app
 
         protected override Expression<Func<Grade, bool>> _getPredicate(GradePK Pkey)
         {
-            return sp => (sp.SchoolId == Pkey.SchoolId) && (sp.StudentId== Pkey.StudentId) && (Pkey.SectionId == sp.SectionId) && (Pkey.GradeTypeCode == sp.GradeTypeCode) && (Pkey.GradeCodeOccurance == sp.GradeCodeOccurrence);
+            return sp => (sp.SchoolId == Pkey.SchoolId) && (sp.StudentId == Pkey.StudentId) && (Pkey.SectionId == sp.SectionId) && (Pkey.GradeTypeCode == sp.GradeTypeCode) && (Pkey.GradeCodeOccurance == sp.GradeCodeOccurrence);
         }
         [HttpGet]
         public async Task<IActionResult> GetGradeByPK([FromQuery] int? SchoolId, [FromQuery] int? StudentId, [FromQuery] int? SectionId, [FromQuery] string? GradeTypeCode, byte? GradeCodeOccurance)

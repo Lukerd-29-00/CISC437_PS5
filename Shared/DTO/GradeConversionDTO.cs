@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DOOR.EF.Models;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using DOOR.EF.Models;
 
 namespace DOOR.Shared.DTO
 {
@@ -9,7 +9,7 @@ namespace DOOR.Shared.DTO
         public int SchoolId { get; set; }
         public string LetterGrade { get; set; } = null!;
     }
-    public class GradeConversionDTO : TrackableDTO,IDTO<GradeConversion, GradeConversionPK>
+    public class GradeConversionDTO : TrackableDTO, IDTO<GradeConversion, GradeConversionPK>
     {
         public GradeConversionPK primaryKey()
         {

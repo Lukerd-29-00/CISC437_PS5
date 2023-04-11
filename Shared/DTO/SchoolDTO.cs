@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DOOR.EF.Models;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using DOOR.EF.Models;
 namespace DOOR.Shared.DTO
 {
-    public class SchoolDTO : TrackableDTO,IDTO <School,int>
+    public class SchoolDTO : TrackableDTO, IDTO<School, int>
     {
         public int primaryKey()
         {

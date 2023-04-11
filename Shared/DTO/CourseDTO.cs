@@ -9,7 +9,7 @@ namespace DOOR.Shared.DTO
         public int SchoolId { get; set; }
         public int CourseNo { get; set; }
     }
-    public class CourseDTO : TrackableDTO,IDTO<Course, CoursePK>
+    public class CourseDTO : TrackableDTO, IDTO<Course, CoursePK>
     {
         public CoursePK primaryKey()
         {

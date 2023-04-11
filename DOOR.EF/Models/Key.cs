@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace DOOR.EF.Models
 {
@@ -30,7 +28,7 @@ namespace DOOR.EF.Models
         [Column("DATA_PROTECTED")]
         [Precision(1)]
         public bool DataProtected { get; set; }
-        [Column("DATA", TypeName ="NCLOB")]
+        [Column("DATA", TypeName = "NCLOB")]
         public string Data { get; set; } = null!;
     }
 }

@@ -5,7 +5,7 @@ namespace DOOR.Client.Services.Core
 {
     public class CourseService : BaseService<CourseDTO>
     {
-        public CourseService(HttpClient client) 
+        public CourseService(HttpClient client)
             : base(client, "Course")
         {
         }

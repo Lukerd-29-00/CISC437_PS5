@@ -1,7 +1,6 @@
 ﻿using DOOR.EF.Models;
 
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
 
 namespace DOOR.Shared.DTO
 {
@@ -12,7 +11,7 @@ namespace DOOR.Shared.DTO
         public int SchoolId { get; set; }
     }
 
-    public class EnrollmentDTO : TrackableDTO,IDTO<Enrollment, EnrollmentPK>
+    public class EnrollmentDTO : TrackableDTO, IDTO<Enrollment, EnrollmentPK>
     {
         public Enrollment ToRecord()
         {

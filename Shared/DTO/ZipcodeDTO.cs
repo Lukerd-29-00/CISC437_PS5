@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DOOR.EF.Models;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
-using DOOR.EF.Models;
 
 namespace DOOR.Shared.DTO
 {
-    public class ZipcodeDTO : TrackableDTO,IDTO<Zipcode,string>
+    public class ZipcodeDTO : TrackableDTO, IDTO<Zipcode, string>
     {
         public string primaryKey()
         {

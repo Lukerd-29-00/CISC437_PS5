@@ -1,19 +1,11 @@
-﻿using System;
-using System.Net.Http;
+﻿using DOOR.Client.eNums;
+using DOOR.Shared.Exceptions;
+using DOOR.Shared.Utils;
+using Newtonsoft.Json;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using Telerik.DataSource;
-using DOOR.Shared.DTO;
-using DOOR.EF.Models;
-using DOOR.Shared;
-using System.Collections.Generic;
 using Telerik.Blazor.Components;
-using DOOR.Shared.Utils;
-using Newtonsoft.Json;
-using DOOR.Client.eNums;
-using DOOR.Shared.Exceptions;
 
 
 namespace DOOR.Client.Services.Common
@@ -127,7 +119,7 @@ namespace DOOR.Client.Services.Common
         {
             var notif = new NotificationModel()
             {
-                Icon = TelerikIcon, 
+                Icon = TelerikIcon,
                 ShowIcon = true,
                 ThemeColor = enumUtil.GetDescription(eNumTelerikThemeColor),
                 Text = strNotificationText,

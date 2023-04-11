@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace DOOR.Shared.Utils
 {
-    public static  class enumUtil
+    public static class enumUtil
     {
         public static string GetDescription(this Enum value)
         {

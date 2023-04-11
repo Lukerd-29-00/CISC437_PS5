@@ -1,6 +1,6 @@
+using DOOR.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using DOOR.Shared;
 
 namespace DOOR.Server.Controllers;
 

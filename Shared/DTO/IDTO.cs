@@ -1,6 +1,4 @@
-﻿using System.Linq.Expressions;
-
-namespace DOOR.Shared.DTO
+﻿namespace DOOR.Shared.DTO
 {
     public interface IDTO<Raw, PK> where Raw : class
     {

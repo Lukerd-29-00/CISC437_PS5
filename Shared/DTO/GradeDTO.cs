@@ -1,5 +1,4 @@
 ﻿using DOOR.EF.Models;
-using DOOR.Shared.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
@@ -13,7 +12,7 @@ namespace DOOR.Shared.DTO
         public string GradeTypeCode { get; set; } = null!;
         public byte GradeCodeOccurance { get; set; }
     }
-    public class GradeDTO : TrackableDTO,IDTO<Grade, GradePK>
+    public class GradeDTO : TrackableDTO, IDTO<Grade, GradePK>
     {
         public GradePK primaryKey()
         {

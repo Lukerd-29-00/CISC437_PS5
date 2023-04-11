@@ -5,7 +5,6 @@ using DOOR.Shared.DTO;
 using DOOR.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
 namespace CSBA6.Server.Controllers.app
@@ -49,7 +48,7 @@ namespace CSBA6.Server.Controllers.app
         protected override Expression<Func<Section, bool>> _getPredicate(SectionPK Pkey)
         {
             return sp => (sp.SectionId == Pkey.SectionId) && (sp.SchoolId == Pkey.SchoolId);
-        } 
+        }
         [HttpGet]
         public async Task<IActionResult> GetSectionByPK([FromQuery] int? SectionId, [FromQuery] int? SchoolId)
         {

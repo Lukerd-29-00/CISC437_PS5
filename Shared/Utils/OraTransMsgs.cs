@@ -1,12 +1,6 @@
 ﻿using DOOR.EF.Data;
 using DOOR.EF.Models;
-using DOOR.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DOOR.Shared.Utils
 {

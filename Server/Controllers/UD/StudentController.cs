@@ -5,10 +5,7 @@ using DOOR.Shared.DTO;
 using DOOR.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.Extensions.Hosting;
 using System.Linq.Expressions;
-using static Duende.IdentityServer.Models.IdentityResources;
 
 namespace CSBA6.Server.Controllers.app
 {

@@ -1,10 +1,9 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.ResponseCompression;
-using Microsoft.EntityFrameworkCore;
+using DOOR.EF.Data;
 using DOOR.Server.Data;
 using DOOR.Server.Models;
-using DOOR.EF.Data;
 using DOOR.Shared.Utils;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

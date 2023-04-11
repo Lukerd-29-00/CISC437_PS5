@@ -13,7 +13,7 @@ namespace CSBA6.Server.Controllers.app
     [Route("api/[controller]")]
     public class CourseController : BaseController<Course, CourseDTO, CoursePK>
     {
-            
+
         public CourseController(DOOROracleContext _DBcontext,
             IOraTransMsgs _OraTransMsgs)
             : base(_DBcontext, _OraTransMsgs)

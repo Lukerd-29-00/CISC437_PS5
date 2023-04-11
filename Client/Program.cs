@@ -1,8 +1,8 @@
+using DOOR.Client;
+using DOOR.Client.Services.Core;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using DOOR.Client;
-using DOOR.Client.Services.Core;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

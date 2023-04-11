@@ -1,11 +1,11 @@
 ﻿using DOOR.EF.Data;
+using DOOR.EF.Models;
 using DOOR.Server.Controllers.Common;
 using DOOR.Shared.DTO;
 using DOOR.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using DOOR.EF.Models;
 
 namespace CSBA6.Server.Controllers.app
 {
@@ -44,7 +44,7 @@ namespace CSBA6.Server.Controllers.app
 
         protected override Expression<Func<GradeConversion, bool>> _getPredicate(GradeConversionPK Pkey)
         {
-            return sp => (sp.LetterGrade== Pkey.LetterGrade) && (sp.SchoolId == Pkey.SchoolId);
+            return sp => (sp.LetterGrade == Pkey.LetterGrade) && (sp.SchoolId == Pkey.SchoolId);
         }
         [HttpGet]
         public async Task<IActionResult> GetGradeConversionByPK([FromQuery] string? LetterGrade, [FromQuery] int? SchoolId)

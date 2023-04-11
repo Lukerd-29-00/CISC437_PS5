@@ -55,8 +55,9 @@ namespace CSBA6.Server.Controllers.app
             else if (StudentId == null || SchoolId == null || SectionId == null)
                 return StatusCode(StatusCodes.Status400BadRequest, "Please send a complete primary key");
             else
-                return await _getByPkHandler(new EnrollmentPK { 
-                    StudentId = (int)StudentId, 
+                return await _getByPkHandler(new EnrollmentPK
+                {
+                    StudentId = (int)StudentId,
                     SchoolId = (int)SchoolId,
                     SectionId = (int)SectionId
                 });
