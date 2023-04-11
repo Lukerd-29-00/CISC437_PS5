@@ -44,7 +44,11 @@ namespace CSBA6.Server.Controllers.app
                 ModifiedDate = sp.ModifiedDate
             };
         }
-
+        protected override void _mutateRecord(Grade original, GradeDTO dto)
+        {
+            original.NumericGrade = dto.NumericGrade;
+            original.Comments = dto.Comments;
+        }
         protected override Expression<Func<Grade, bool>> _getPredicate(GradePK Pkey)
         {
             return sp => (sp.SchoolId == Pkey.SchoolId) && (sp.StudentId == Pkey.StudentId) && (Pkey.SectionId == sp.SectionId) && (Pkey.GradeTypeCode == sp.GradeTypeCode) && (Pkey.GradeCodeOccurance == sp.GradeCodeOccurrence);

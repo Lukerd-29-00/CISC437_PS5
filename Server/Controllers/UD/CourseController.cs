@@ -44,6 +44,15 @@ namespace CSBA6.Server.Controllers.app
             };
         }
 
+        protected override void _mutateRecord(Course course, CourseDTO dto)
+        {
+            course.Description = dto.Description;
+            course.Cost = dto.Cost;
+            course.Prerequisite = dto.Prerequisite;
+            course.SchoolId = dto.SchoolId;
+            course.PrerequisiteSchoolId = dto.PrerequisiteSchoolId;
+        }
+
         protected override Expression<Func<Course, bool>> _getPredicate(CoursePK Pkey)
         {
             return sp => (sp.CourseNo == Pkey.CourseNo) && (sp.SchoolId == Pkey.SchoolId);

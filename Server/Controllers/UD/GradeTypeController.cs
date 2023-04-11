@@ -40,7 +40,10 @@ namespace CSBA6.Server.Controllers.app
                 ModifiedDate = sp.ModifiedDate
             };
         }
-
+        protected override void _mutateRecord(GradeType original, GradeTypeDTO dto)
+        {
+            original.Description = dto.Description;
+        }
         protected override Expression<Func<GradeType, bool>> _getPredicate(GradeTypePK Pkey)
         {
             return sp => (sp.GradeTypeCode == Pkey.GradeTypeCode) && (sp.SchoolId == Pkey.SchoolId);

@@ -43,6 +43,13 @@ namespace CSBA6.Server.Controllers.app
             };
         }
 
+        protected override void _mutateRecord(Enrollment enr, EnrollmentDTO dto)
+        {
+            enr.EnrollDate = dto.EnrollDate;
+            enr.FinalGrade = dto.FinalGrade;
+
+        }
+
         protected override Expression<Func<Enrollment, bool>> _getPredicate(EnrollmentPK Pkey)
         {
             return sp => (sp.StudentId == Pkey.StudentId) && (sp.SchoolId == Pkey.SchoolId) && (sp.SectionId == Pkey.SectionId);

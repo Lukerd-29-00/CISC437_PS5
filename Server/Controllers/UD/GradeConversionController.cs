@@ -42,6 +42,14 @@ namespace CSBA6.Server.Controllers.app
             };
         }
 
+        protected override void _mutateRecord(GradeConversion original, GradeConversionDTO dto)
+        {
+            original.LetterGrade = dto.LetterGrade;
+            original.GradePoint = dto.GradePoint;
+            original.MinGrade  = dto.MinGrade;
+            original.MaxGrade = dto.MaxGrade;
+        }
+
         protected override Expression<Func<GradeConversion, bool>> _getPredicate(GradeConversionPK Pkey)
         {
             return sp => (sp.LetterGrade == Pkey.LetterGrade) && (sp.SchoolId == Pkey.SchoolId);

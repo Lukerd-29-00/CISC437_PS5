@@ -39,7 +39,11 @@ namespace CSBA6.Server.Controllers.app
                 ModifiedDate = sp.ModifiedDate,
             };
         }
-
+        protected override void _mutateRecord(Zipcode original, ZipcodeDTO dto)
+        {
+            original.City = dto.City;
+            original.State = dto.State;
+        }
         protected override Expression<Func<Zipcode, bool>> _getPredicate(string Pkey)
         {
             return sp => sp.Zip == Pkey;

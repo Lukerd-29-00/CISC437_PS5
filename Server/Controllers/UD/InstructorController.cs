@@ -45,7 +45,15 @@ namespace CSBA6.Server.Controllers.app
                 ModifiedDate = sp.ModifiedDate,
             };
         }
-
+        protected override void _mutateRecord(Instructor original, InstructorDTO dto)
+        {
+            original.Salutation = dto.Salutation;
+            original.FirstName = dto.FirstName;
+            original.LastName = dto.LastName;
+            original.StreetAddress = dto.StreetAddress;
+            original.Zip = dto.Zip;
+            original.Phone = dto.Phone;
+        }
         protected override Expression<Func<Instructor, bool>> _getPredicate(InstructorPK Pkey)
         {
             return sp => (sp.InstructorId == Pkey.InstructorId) && (sp.SchoolId == Pkey.SchoolId);

@@ -1,5 +1,6 @@
 ﻿using DOOR.EF.Data;
 using DOOR.Shared.DTO;
+using DOOR.Shared.Exceptions;
 using DOOR.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,8 @@ namespace DOOR.Server.Controllers.Common
         protected abstract Expression<Func<Raw, DTO>> _getDTOExp();
 
         protected abstract Expression<Func<Raw, bool>> _getPredicate(PK pkey);
+
+        protected abstract void _mutateRecord(Raw original, DTO dto);
 
         protected async Task<IActionResult> _getHandler()
         {
@@ -75,9 +78,15 @@ namespace DOOR.Server.Controllers.Common
         {
             try
             {
-                Raw c = _DTO.ToRecord();
-                _context.Update(c);
-                await _context.SaveChangesAsync();
+                Raw? c = _getContext().Where(_getPredicate(_DTO.primaryKey())).FirstOrDefault();
+                if (c != null)
+                {
+                    _mutateRecord(c,_DTO);
+                    await _context.SaveChangesAsync();
+                    return Ok(null);
+                }
+                return StatusCode(StatusCodes.Status404NotFound);
+
             }
 
             catch (DbUpdateException Dex)

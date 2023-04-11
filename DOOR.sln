@@ -13,6 +13,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{C47BBC72-B6FE-4C55-B169-7EC1CDEEE946}"
 	ProjectSection(SolutionItems) = preProject
 		Commands.txt = Commands.txt
+		api.txt = api.txt
 	EndProjectSection
 EndProject
 Global
