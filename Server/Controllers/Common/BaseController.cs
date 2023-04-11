@@ -8,7 +8,7 @@ using DOOR.Shared.DTO;
 
 namespace DOOR.Server.Controllers.Common
 {
-    public abstract class BaseController<Raw, DTO, PK> : Controller where DTO : class where Raw : class
+    public abstract class BaseController<Raw, DTO, PK> : Controller where DTO : IDTO<Raw,PK> where Raw : class
     {
 
         protected DOOROracleContext _context;
@@ -23,13 +23,10 @@ namespace DOOR.Server.Controllers.Common
 
         protected abstract DbSet<Raw> _getContext();
 
+        //These expressions have to be created in the controller instead of the DTO, because static abstract methods and self types are not supported.
         protected abstract Expression<Func<Raw, DTO>> _getDTOExp();
 
         protected abstract Expression<Func<Raw, bool>> _getPredicate(PK pkey);
-        protected abstract PK _extract_Pkey(DTO data);
-        protected abstract Raw _createRecord(DTO obj);
-
-        protected abstract void _mutateRecord(Raw record, DTO newRecord);
 
         protected async Task<IActionResult> _getHandler()
         {
@@ -51,11 +48,11 @@ namespace DOOR.Server.Controllers.Common
         {
             try
             {
-                Raw? c = await _getContext().Where(_getPredicate(_extract_Pkey(_DTO))).FirstOrDefaultAsync();
+                Raw? c = await _getContext().Where(_getPredicate(_DTO.primaryKey())).FirstOrDefaultAsync();
 
                 if (c == null)
                 {
-                    _getContext().Add(_createRecord(_DTO));
+                    _getContext().Add(_DTO.ToRecord());
                     await _context.SaveChangesAsync();
                 }
             }
@@ -79,14 +76,9 @@ namespace DOOR.Server.Controllers.Common
         {
             try
             {
-                Raw? c = await _getContext().Where(_getPredicate(_extract_Pkey(_DTO))).FirstOrDefaultAsync();
-
-                if (c != null)
-                {
-                    _mutateRecord(c, _DTO);
-                    //Call to Update is unnecessary, since c is already being tracked by _context.
-                    await _context.SaveChangesAsync();
-                }
+                Raw c = _DTO.ToRecord();
+                _context.Update(c);
+                await _context.SaveChangesAsync();
             }
 
             catch (DbUpdateException Dex)

@@ -28,7 +28,7 @@ namespace DOOR.EF.Models
         public int CourseNo { get; set; }
         [Column("SECTION_NO")]
         [Precision(3)]
-        public byte SectionNo { get; set; }
+        public int SectionNo { get; set; }
         [Column("START_DATE_TIME", TypeName = "DATE")]
         public DateTime? StartDateTime { get; set; }
         [Column("LOCATION")]
@@ -40,7 +40,7 @@ namespace DOOR.EF.Models
         public int InstructorId { get; set; }
         [Column("CAPACITY")]
         [Precision(3)]
-        public byte? Capacity { get; set; }
+        public int? Capacity { get; set; }
         [Column("CREATED_BY")]
         [StringLength(30)]
         [Unicode(false)]
