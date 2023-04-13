@@ -54,36 +54,39 @@ namespace CSBA6.Server.Controllers.app
         {
             return sp => (sp.LetterGrade == Pkey.LetterGrade) && (sp.SchoolId == Pkey.SchoolId);
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetGradeConversionByPK([FromQuery] string? LetterGrade, [FromQuery] int? SchoolId)
+        [Route("GetGradeConversion")]
+        public async Task<IActionResult> GetGradeConversion() {
+            return await _getHandler();
+        }
+
+        [HttpGet]
+        [Route("GetGradeConversion/{SchoolId}/{LetterGrade}")]
+        public async Task<IActionResult> GetGradeConversionByPK(int SchoolId, string LetterGrade)
         {
-            if (LetterGrade == null && SchoolId == null)
-                return await _getHandler();
-            else if (LetterGrade == null || SchoolId == null)
-                return StatusCode(StatusCodes.Status400BadRequest, "Please send a complete primary key");
-            else
-                return await _getByPkHandler(new GradeConversionPK { LetterGrade = LetterGrade, SchoolId = (int)SchoolId });
+            return await _getByPkHandler(new GradeConversionPK { LetterGrade = LetterGrade, SchoolId = SchoolId });
         }
 
         [HttpPost]
+        [Route("PostGradeConversion")]
         public async Task<IActionResult> PostGradeConversion([FromBody] GradeConversionDTO _GradeConversionDTO)
         {
             return await _postHandler(_GradeConversionDTO);
         }
 
         [HttpPut]
+        [Route("PutGradeConversion")]
         public async Task<IActionResult> PutGradeConversion([FromBody] GradeConversionDTO _GradeConversionDTO)
         {
             return await _putHandler(_GradeConversionDTO);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteGradeConversion([FromQuery] string? LetterGrade, [FromQuery] int? SchoolId)
+        [Route("DeleteGradeConversion/{SchoolId}/{LetterGrade}")]
+        public async Task<IActionResult> DeleteGradeConversion(int SchoolId, string LetterGrade)
         {
-            if (LetterGrade != null && SchoolId != null)
-                return await _deleteHandler(new GradeConversionPK { LetterGrade = LetterGrade, SchoolId = (int)SchoolId });
-            else
-                return StatusCode(StatusCodes.Status400BadRequest, "Please provide a complete primary key.");
+            return await _deleteHandler(new GradeConversionPK { LetterGrade = LetterGrade, SchoolId = SchoolId });
         }
     }
 }

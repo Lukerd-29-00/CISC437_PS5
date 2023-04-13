@@ -46,34 +46,40 @@ namespace CSBA6.Server.Controllers.app
         {
             return sp => sp.SchoolId == Pkey;
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetSchoolByPK([FromQuery] int? SchoolId)
+        [Route("GetSchool")]
+        public async Task<IActionResult> GetSchool()
         {
-            if (SchoolId == null)
-                return await _getHandler();
-            else
-                return await _getByPkHandler((int)SchoolId);
+            return await _getHandler();
+        }
+
+        [HttpGet]
+        [Route("GetSchool/{SchoolId}")]
+        public async Task<IActionResult> GetSchoolByPK(int SchoolId)
+        {
+                return await _getByPkHandler(SchoolId);
         }
 
         [HttpPost]
+        [Route("PostSchool")]
         public async Task<IActionResult> PostSchool([FromBody] SchoolDTO _SchoolDTO)
         {
             return await _postHandler(_SchoolDTO);
         }
 
         [HttpPut]
+        [Route("PutSchool")]
         public async Task<IActionResult> PutSchool([FromBody] SchoolDTO _SchoolDTO)
         {
             return await _putHandler(_SchoolDTO);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteSchool(int? SchoolId)
+        [Route("DeleteSchool/{SchoolId}")]
+        public async Task<IActionResult> DeleteSchool(int SchoolId)
         {
-            if (SchoolId != null)
-                return await _deleteHandler((int)SchoolId);
-            else
-                return StatusCode(StatusCodes.Status400BadRequest, "Please provide a complete primary key.");
+            return await _deleteHandler(SchoolId);
         }
     }
 }

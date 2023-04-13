@@ -53,50 +53,54 @@ namespace CSBA6.Server.Controllers.app
         {
             return sp => (sp.SchoolId == Pkey.SchoolId) && (sp.StudentId == Pkey.StudentId) && (Pkey.SectionId == sp.SectionId) && (Pkey.GradeTypeCode == sp.GradeTypeCode) && (Pkey.GradeCodeOccurance == sp.GradeCodeOccurrence);
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetGradeByPK([FromQuery] int? SchoolId, [FromQuery] int? StudentId, [FromQuery] int? SectionId, [FromQuery] string? GradeTypeCode, byte? GradeCodeOccurance)
+        [Route("GetGrade")]
+        public async Task<IActionResult> GetGrade()
         {
-            if (SchoolId == null && StudentId == null && SectionId == null && GradeTypeCode == null && GradeCodeOccurance == null)
-                return await _getHandler();
-            else if (SchoolId == null || StudentId == null || SectionId == null || GradeTypeCode == null || GradeCodeOccurance == null)
-                return StatusCode(StatusCodes.Status400BadRequest, "Please send a complete primary key");
-            else
-                return await _getByPkHandler(new GradePK
-                {
-                    SchoolId = (int)SchoolId,
-                    StudentId = (int)StudentId,
-                    SectionId = (int)SectionId,
-                    GradeTypeCode = GradeTypeCode,
-                    GradeCodeOccurance = (byte)GradeCodeOccurance
-                });
+            return await _getHandler();
+        }
+
+        [HttpGet]
+        [Route("GetGrade/{SchoolId}/{GradeTypeCode}/{GradeCodeOccurance}/{SectionId}/{StudentId}")]
+        public async Task<IActionResult> GetGradeByPK(int SchoolId, string GradeTypeCode, byte GradeCodeOccurance, int SectionId, int StudentId)
+        {
+            return await _getByPkHandler(new GradePK
+            {
+                SchoolId = SchoolId,
+                StudentId = StudentId,
+                SectionId = SectionId,
+                GradeTypeCode = GradeTypeCode,
+                GradeCodeOccurance = GradeCodeOccurance
+            });
         }
 
         [HttpPost]
+        [Route("PostGrade")]
         public async Task<IActionResult> PostGrade([FromBody] GradeDTO _GradeDTO)
         {
             return await _postHandler(_GradeDTO);
         }
 
         [HttpPut]
+        [Route("PutGrade")]
         public async Task<IActionResult> PutGrade([FromBody] GradeDTO _GradeDTO)
         {
             return await _putHandler(_GradeDTO);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteGrade([FromQuery] int? SchoolId, [FromQuery] int? StudentId, [FromQuery] int? SectionId, [FromQuery] string? GradeTypeCode, byte? GradeCodeOccurance)
+        [Route("DeleteGrade/{SchoolId}/{GradeTypeCode}/{GradeCodeOccurance}/{SectionId}/{StudentId}")]
+        public async Task<IActionResult> DeleteGrade(int SchoolId, string GradeTypeCode, byte GradeCodeOccurance, int SectionId, int StudentId)
         {
-            if (SchoolId != null && StudentId != null && SectionId != null && GradeTypeCode != null && GradeCodeOccurance != null)
-                return await _deleteHandler(new GradePK
-                {
-                    SchoolId = (int)SchoolId,
-                    StudentId = (int)StudentId,
-                    SectionId = (int)SectionId,
-                    GradeTypeCode = GradeTypeCode,
-                    GradeCodeOccurance = (byte)GradeCodeOccurance
-                });
-            else
-                return StatusCode(StatusCodes.Status400BadRequest, "Please provide a complete primary key.");
+            return await _deleteHandler(new GradePK
+            {
+                SchoolId = SchoolId,
+                StudentId = StudentId,
+                SectionId = SectionId,
+                GradeTypeCode = GradeTypeCode,
+                GradeCodeOccurance = GradeCodeOccurance
+            });
         }
     }
 }

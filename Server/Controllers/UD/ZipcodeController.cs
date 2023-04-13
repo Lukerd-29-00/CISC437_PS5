@@ -48,34 +48,40 @@ namespace CSBA6.Server.Controllers.app
         {
             return sp => sp.Zip == Pkey;
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetZipcodeByPK([FromQuery] string? Zip)
+        [Route("GetZipcode")]
+        public async Task<IActionResult> GetZipcode()
         {
-            if (Zip == null)
-                return await _getHandler();
-            else
-                return await _getByPkHandler(Zip);
+            return await _getHandler();
+        }
+
+        [HttpGet]
+        [Route("GetZipcode/{Zip}")]
+        public async Task<IActionResult> GetZipcodeByPK(string Zip)
+        {
+            return await _getByPkHandler(Zip);
         }
 
         [HttpPost]
+        [Route("PostZipcode")]
         public async Task<IActionResult> PostZipcode([FromBody] ZipcodeDTO _ZipcodeDTO)
         {
             return await _postHandler(_ZipcodeDTO);
         }
 
         [HttpPut]
+        [Route("PutZipcode")]
         public async Task<IActionResult> PutZipcode([FromBody] ZipcodeDTO _ZipcodeDTO)
         {
             return await _putHandler(_ZipcodeDTO);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteZipcode(string? Zip)
+        [Route("DeleteZipcode/{Zip}")]
+        public async Task<IActionResult> DeleteZipcode(string Zip)
         {
-            if (Zip != null)
-                return await _deleteHandler(Zip);
-            else
-                return StatusCode(StatusCodes.Status400BadRequest, "Please provide a complete primary key.");
+            return await _deleteHandler(Zip);
         }
     }
 }

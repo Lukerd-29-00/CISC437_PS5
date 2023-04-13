@@ -54,49 +54,50 @@ namespace CSBA6.Server.Controllers.app
         {
             return sp => (sp.StudentId == Pkey.StudentId) && (sp.SchoolId == Pkey.SchoolId) && (sp.SectionId == Pkey.SectionId);
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetEnrollmentByPK([FromQuery] int? StudentId, [FromQuery] int? SchoolId, int? SectionId)
+        [Route("GetEnrollment")]
+        public async Task<IActionResult> GetEnrollment()
         {
-            if (StudentId == null && SchoolId == null && SectionId == null)
-                return await _getHandler();
-            else if (StudentId == null || SchoolId == null || SectionId == null)
-                return StatusCode(StatusCodes.Status400BadRequest, "Please send a complete primary key");
-            else
+            return await _getHandler();
+        }
+
+        [HttpGet]
+        [Route("GetEnrollment/{SchoolId}/{SectionId}/{StudentId}")]
+        public async Task<IActionResult> GetEnrollmentByPK(int SchoolId, int SectionId, int StudentId)
+        {
                 return await _getByPkHandler(new EnrollmentPK
                 {
-                    StudentId = (int)StudentId,
-                    SchoolId = (int)SchoolId,
-                    SectionId = (int)SectionId
+                    StudentId = StudentId,
+                    SchoolId = SchoolId,
+                    SectionId = SectionId
                 });
         }
 
         [HttpPost]
+        [Route("PostEnrollment")]
         public async Task<IActionResult> PostEnrollment([FromBody] EnrollmentDTO _EnrollmentDTO)
         {
             return await _postHandler(_EnrollmentDTO);
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutEnrollment([FromBody] EnrollmentDTO _EnrollmentDTO, [FromQuery] int? EnrollmentNo, [FromQuery] int? SchoolId)
+        [Route("PutEnrollment")]
+        public async Task<IActionResult> PutEnrollment([FromBody] EnrollmentDTO _EnrollmentDTO)
         {
-            if (EnrollmentNo != null && SchoolId != null)
-                return await _putHandler(_EnrollmentDTO);
-            else
-                return StatusCode(StatusCodes.Status400BadRequest, "Please provide a complete primary key through the query string.");
+            return await _putHandler(_EnrollmentDTO);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteEnrollment([FromQuery] int? StudentId, [FromQuery] int? SchoolId, int? SectionId)
+        [Route("DeleteEnrollment/{SchoolId}/{SectionId}/{StudentId}")]
+        public async Task<IActionResult> DeleteEnrollment(int SchoolId, int SectionId, int StudentId)
         {
-            if (StudentId != null && SchoolId != null && SectionId != null)
                 return await _deleteHandler(new EnrollmentPK
                 {
                     StudentId = (int)StudentId,
                     SchoolId = (int)SchoolId,
                     SectionId = (int)SectionId
                 });
-            else
-                return StatusCode(StatusCodes.Status400BadRequest, "Please provide a complete primary key.");
         }
     }
 }

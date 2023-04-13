@@ -57,36 +57,41 @@ namespace CSBA6.Server.Controllers.app
         {
             return sp => (sp.CourseNo == Pkey.CourseNo) && (sp.SchoolId == Pkey.SchoolId);
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetCourseByPK([FromQuery] int? CourseNo, [FromQuery] int? SchoolId)
+        [Route("GetCourse")]
+        public async Task<IActionResult> GetCourse()
         {
-            if (CourseNo == null && SchoolId == null)
-                return await _getHandler();
-            else if (CourseNo == null || SchoolId == null)
-                return StatusCode(StatusCodes.Status400BadRequest, "Please send a complete primary key");
-            else
-                return await _getByPkHandler(new CoursePK { CourseNo = (int)CourseNo, SchoolId = (int)SchoolId });
+            return await _getHandler();
+        }
+
+        [HttpGet]
+        [Route("GetCourse/{SchoolId}/{CourseNo}")]
+        public async Task<IActionResult> GetCourseByPK(int SchoolId, int CourseNo)
+        {
+            return await _getByPkHandler(new CoursePK { CourseNo = CourseNo, SchoolId = SchoolId });
         }
 
         [HttpPost]
+        [Route("PostCourse")]
         public async Task<IActionResult> PostCourse([FromBody] CourseDTO _CourseDTO)
         {
             return await _postHandler(_CourseDTO);
         }
 
         [HttpPut]
+        [Route("PutCourse")]
         public async Task<IActionResult> PutCourse([FromBody] CourseDTO _CourseDTO)
         {
             return await _putHandler(_CourseDTO);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteCourse([FromQuery] int? CourseNo, [FromQuery] int? SchoolId)
+        [Route("DeleteCourse/{SchoolId}/{CourseNo}/")]
+        public async Task<IActionResult> DeleteCourse(int SchoolId, int CourseNo)
         {
-            if (CourseNo != null && SchoolId != null)
-                return await _deleteHandler(new CoursePK { CourseNo = (int)CourseNo, SchoolId = (int)SchoolId });
-            else
-                return StatusCode(StatusCodes.Status400BadRequest, "Please provide a complete primary key.");
+            return await _deleteHandler(new CoursePK { CourseNo = CourseNo, SchoolId = SchoolId });
+
         }
     }
 }

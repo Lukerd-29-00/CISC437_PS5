@@ -48,36 +48,42 @@ namespace CSBA6.Server.Controllers.app
         {
             return sp => (sp.GradeTypeCode == Pkey.GradeTypeCode) && (sp.SchoolId == Pkey.SchoolId);
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetGradeTypeByPK([FromQuery] string? GradeTypeCode, [FromQuery] int? SchoolId)
+        [Route("GetGradeType")]
+        public async Task<IActionResult> GetGradeType()
         {
-            if (GradeTypeCode == null && SchoolId == null)
-                return await _getHandler();
-            else if (GradeTypeCode == null || SchoolId == null)
-                return StatusCode(StatusCodes.Status400BadRequest, "Please send a complete primary key");
-            else
-                return await _getByPkHandler(new GradeTypePK { GradeTypeCode = GradeTypeCode, SchoolId = (int)SchoolId });
+            return await _getHandler();
+        }
+
+        [HttpGet]
+        [Route("GetGradeType/{SchoolId}/{GradeTypeCode}")]
+        public async Task<IActionResult> GetGradeTypeByPK(int SchoolId, string GradeTypeCode)
+        {
+
+            return await _getByPkHandler(new GradeTypePK { GradeTypeCode = GradeTypeCode, SchoolId = SchoolId });
         }
 
         [HttpPost]
+        [Route("PostGradeType")]
         public async Task<IActionResult> PostGradeType([FromBody] GradeTypeDTO _GradeTypeDTO)
         {
             return await _postHandler(_GradeTypeDTO);
         }
 
         [HttpPut]
+        [Route("PutGradeType")]
         public async Task<IActionResult> PutGradeType([FromBody] GradeTypeDTO _GradeTypeDTO)
         {
             return await _putHandler(_GradeTypeDTO);
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteGradeType([FromQuery] string? GradeTypeCode, [FromQuery] int? SchoolId)
+        [Route("DeleteGradeType/{SchoolId}/{GradeTypeCode}")]
+        public async Task<IActionResult> DeleteGradeType(int SchoolId, string GradeTypeCode)
         {
-            if (GradeTypeCode != null && SchoolId != null)
-                return await _deleteHandler(new GradeTypePK { GradeTypeCode = GradeTypeCode, SchoolId = (int)SchoolId });
-            else
-                return StatusCode(StatusCodes.Status400BadRequest, "Please provide a complete primary key.");
+            return await _deleteHandler(new GradeTypePK { GradeTypeCode = GradeTypeCode, SchoolId = SchoolId });
+
         }
     }
 }

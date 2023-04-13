@@ -102,8 +102,6 @@ namespace DOOR.Server.Controllers.Common
                 string ex_ser = Newtonsoft.Json.JsonConvert.SerializeObject(errors);
                 return StatusCode(StatusCodes.Status417ExpectationFailed, ex_ser);
             }
-
-            return Ok();
         }
 
 

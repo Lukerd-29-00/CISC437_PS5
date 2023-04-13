@@ -57,24 +57,30 @@ namespace CSBA6.Server.Controllers.app
         {
             return sp => (sp.SectionId == Pkey.SectionId) && (sp.SchoolId == Pkey.SchoolId);
         }
+
         [HttpGet]
-        public async Task<IActionResult> GetSectionByPK([FromQuery] int? SectionId, [FromQuery] int? SchoolId)
+        [Route("GetSection")]
+        public async Task<IActionResult> GetSection()
         {
-            if (SectionId == null && SchoolId == null)
-                return await _getHandler();
-            else if (SectionId == null || SchoolId == null)
-                return StatusCode(StatusCodes.Status400BadRequest, "Please send a complete primary key");
-            else
-                return await _getByPkHandler(new SectionPK { SectionId = (int)SectionId, SchoolId = (int)SchoolId });
+            return await _getHandler();
+        }
+
+        [HttpGet]
+        [Route("GetSection/{SchoolId}/{SectionId}")]
+        public async Task<IActionResult> GetSectionByPK(int SchoolId, int SectionId)
+        {
+                return await _getByPkHandler(new SectionPK { SectionId = SectionId, SchoolId = SchoolId });
         }
 
         [HttpPost]
+        [Route("PostSection")]
         public async Task<IActionResult> PostSection([FromBody] SectionDTO _SectionDTO)
         {
             return await _postHandler(_SectionDTO);
         }
 
         [HttpPut]
+        [Route("PutSection")]
         public async Task<IActionResult> PutSection([FromBody] SectionDTO _SectionDTO, [FromQuery] int? SectionId, [FromQuery] int? SchoolId)
         {
             if (SectionId != null && SchoolId != null)
@@ -84,12 +90,10 @@ namespace CSBA6.Server.Controllers.app
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteSection([FromQuery] int? SectionId, [FromQuery] int? SchoolId)
+        [Route("DeleteSection/{SchoolId}/{SectionId}")]
+        public async Task<IActionResult> DeleteSection(int SchoolId, int SectionId)
         {
-            if (SectionId != null && SchoolId != null)
-                return await _deleteHandler(new SectionPK { SectionId = (int)SectionId, SchoolId = (int)SchoolId });
-            else
-                return StatusCode(StatusCodes.Status400BadRequest, "Please provide a complete primary key.");
+            return await _deleteHandler(new SectionPK { SectionId = SectionId, SchoolId = SchoolId });
         }
     }
 }
