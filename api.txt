@@ -2,7 +2,7 @@ This has a slightly different API from the course controller. The reason for thi
 
 Each applicable table has an endpoint. The endpoint can be supplied path parameters representing the primary key.
 
-The order of the parameters is hard-coded into each controller. I tried to do it in a hierarchical fashion: for example, for course, it goes schoolId then courseNo.
+The order of the parameters is hard-coded into each controller. I tried to do it in a hierarchical fashion: for example, for course, it goes schoolId then courseNo, because each school has several courses.
 
 GET /course/getcourse/1/122
 Returns the course record with a school id of 1 and a course no of 122.
