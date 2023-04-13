@@ -1,20 +1,21 @@
-This has a slightly different API from the course controller. The reason for this is that many tables have compound keys, and cannot be queried with a single parameter. Using a bunch of path parameters makes it hard to tell which parameter is which.
+This has a slightly different API from the course controller. The reason for this is that many tables have compound keys, and cannot be queried with a single parameter.
 
-Each applicable table has an endpoint. The endpoint can be supplied query parameters to specify a single record. For example:
+Each applicable table has an endpoint. The endpoint can be supplied path parameters representing the primary key.
 
-GET /course?courseno=1&schoolid=1
+The order of the parameters is hard-coded into each controller. I tried to do it in a hierarchical fashion: for example, for course, it goes schoolId then courseNo.
 
-Returns the course record with a school id of 1 and a course no of 1.
+GET /course/getcourse/1/122
+Returns the course record with a school id of 1 and a course no of 122.
 
-DELETE /course?courseno=1&schoolid=1
+DELETE /course/deletecourse/1/122
 
 Deletes this record.
 
-POST /course
+POST /course/postcourse
 
 Create a new course record.
 
-PUT /course
+PUT /course/putcourse
 
 If there is a course record with a primary key matching the one supplied in the body, update it. Otherwise a 404 error is returned.
 Since the primary key has to match the original, the columns it covers cannot be chanegd via PUT. Also, the tracking columns (created by, created date, etc.) are handled by a trigger and are thus not writable through the API.
